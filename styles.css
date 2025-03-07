@@ -1,8 +1,9 @@
 html, body {
-    overflow-x: hidden;
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow-y: auto; /* Tillater vertikal scrolling */
+    overflow-x: hidden; /* Hindrer horisontal scrolling */
 }
 
 body {
@@ -15,7 +16,6 @@ body {
     align-items: center;
     background: linear-gradient(to bottom, #87CEEB, #B0E0E6);
     height: 100vh;
-    overflow: hidden;
     position: relative;
     
 }
@@ -49,6 +49,9 @@ main {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    max-height: none; /* Fjern begrensning */
+    height: auto; /* Tillat naturlig vekst */
+    overflow: visible; /* Sørger for at nye elementer ikke skjules */
 }
 
 .wish-item {
