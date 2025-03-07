@@ -265,3 +265,12 @@ input, textarea {
     background-color: #e65c00;
     transform: scale(1.1);
 }
+
+.edit-btn {
+    position: absolute;
+    top: 8px;
+    right: 30px; /* Plasseres ved siden av X-ikonet */
+    font-size: 12px;
+    cursor: pointer;
+    color: blue;
+}
