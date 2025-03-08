@@ -285,3 +285,16 @@ input, textarea {
     transform: scale(1.1);
 }
 
+.buddy-image {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 40px; /* Størrelse på profilbildet */
+    height: 40px;
+    border-radius: 50%; /* Gjør det rundt */
+    object-fit: cover; /* Sørger for at bildet ikke strekkes */
+    border: 2px solid white; /* Gir en fin kant */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    display: none; /* Skjules til vi har et bilde */
+}
+

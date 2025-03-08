@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("edit-modal");
     const closeModal = document.querySelector(".close-btn");
     const saveBtn = document.getElementById("save-btn");
+    
 
     const imageUrlInput = document.getElementById("image-url");
     const imageUploadInput = document.getElementById("image-upload");
@@ -92,4 +93,52 @@ document.addEventListener("DOMContentLoaded", function () {
         addEventListenersToWishItem(newWish);
         wishList.appendChild(newWish);
     });
+});
+
+let cropper; // Variabel for å lagre Cropper-instansen
+
+// Når brukeren laster opp et bilde
+imageUploadInput.addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const imageElement = document.getElementById("image-preview");
+            imageElement.src = e.target.result;
+            imageElement.style.display = "block";
+
+            // Hvis Cropper allerede er aktivert, fjern den
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            // Start Cropper.js på bildet
+            cropper = new Cropper(imageElement, {
+                aspectRatio: 16 / 9, // Forholdet mellom bredde og høyde
+                viewMode: 1,
+                movable: true,
+                zoomable: true,
+                scalable: true,
+                rotatable: false,
+                cropBoxMovable: true,
+                cropBoxResizable: true
+            });
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Når brukeren klikker "Lagre"
+saveBtn.addEventListener("click", function () {
+    if (!selectedWish) return;
+
+    const croppedCanvas = cropper.getCroppedCanvas();
+    if (croppedCanvas) {
+        const croppedImageUrl = croppedCanvas.toDataURL("image/png"); // Henter beskjært bilde
+        const imageElement = selectedWish.querySelector(".wish-image");
+        imageElement.src = croppedImageUrl;
+        imageElement.style.display = "block";
+    }
+
+    modal.style.display = "none";
 });
