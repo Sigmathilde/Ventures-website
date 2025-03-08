@@ -5,10 +5,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeModal = document.querySelector(".close-btn");
     const saveBtn = document.getElementById("save-btn");
     
-
     const imageUrlInput = document.getElementById("image-url");
-    const imageUploadInput = document.getElementById("image-upload");
-
+    const imageUploadInput = document.getElementById("image-upload"); // Hent riktig id
+    const previewImage = document.getElementById("image-preview");
+    
+     if (!imageUploadInput) {
+         console.error("❌ FEIL: Fant ikke #image-upload i DOM!");
+        return;
+    }
+    
+    imageUploadInput.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+    
+        if (file) {
+            const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block"; // Vis bildet umiddelbart
+                    console.log("✅ Forhåndsvisning oppdatert!");
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    
     let selectedWish = null;
 
     modal.style.display = "none";
@@ -16,10 +35,20 @@ document.addEventListener("DOMContentLoaded", function () {
     function openModal(wishElement) {
         selectedWish = wishElement;
         const image = selectedWish.querySelector(".wish-image");
-
-        imageUrlInput.value = image.src || "";
+        const previewImage = document.getElementById("image-preview");
+    
+        // Sett forhåndsvisningen til det eksisterende bildet i ønskelisten (hvis det finnes)
+        if (image.src && image.style.display !== "none") {
+            previewImage.src = image.src;
+            previewImage.style.display = "block";
+        } else {
+            previewImage.src = "";
+            previewImage.style.display = "none";
+        }
+    
         modal.style.display = "flex";
     }
+    
 
     closeModal.addEventListener("click", function () {
         modal.style.display = "none";
@@ -129,16 +158,51 @@ imageUploadInput.addEventListener("change", function (event) {
 });
 
 // Når brukeren klikker "Lagre"
-saveBtn.addEventListener("click", function () {
+document.getElementById("save-btn").addEventListener("click", function () {
     if (!selectedWish) return;
 
-    const croppedCanvas = cropper.getCroppedCanvas();
-    if (croppedCanvas) {
-        const croppedImageUrl = croppedCanvas.toDataURL("image/png"); // Henter beskjært bilde
-        const imageElement = selectedWish.querySelector(".wish-image");
-        imageElement.src = croppedImageUrl;
-        imageElement.style.display = "block";
+    const previewImage = document.getElementById("image-preview");
+    const wishImage = selectedWish.querySelector(".wish-image");
+
+    if (previewImage.src && previewImage.style.display !== "none") {
+        wishImage.src = previewImage.src; // Kopier bildet til ønskelisten
+        wishImage.style.display = "block"; // Sørg for at det vises
     }
 
-    modal.style.display = "none";
+    modal.style.display = "none"; // Lukk modalen
 });
+
+
+document.getElementById("image-upload").addEventListener("change", function (event) {
+    const file = event.target.files[0]; // Hent valgt fil
+    if (file) {
+        const reader = new FileReader(); // Opprett fil-leser
+        reader.onload = function (e) {
+            const previewImage = document.getElementById("image-preview");
+            previewImage.src = e.target.result; // Sett bildet i forhåndsvisningen
+            previewImage.style.display = "block"; // Sørg for at det vises
+
+            // Hvis Cropper allerede er aktivert, fjern den
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            // Start Cropper.js på bildet
+            cropper = new Cropper(previewImage, {
+                aspectRatio: 16 / 9,
+                viewMode: 1,
+                movable: true,
+                zoomable: true,
+                scalable: true,
+                rotatable: false,
+                cropBoxMovable: true,
+                cropBoxResizable: true
+            });
+        };
+        reader.readAsDataURL(file); // Les bildet som Data URL
+    }
+
+    console.log("Fil valgt:", event.target.files[0]); // Logger filen i konsollen
+
+});
+
