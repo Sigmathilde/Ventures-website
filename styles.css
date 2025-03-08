@@ -100,7 +100,7 @@ main {
     font-size: 14px;
     cursor: pointer;
     z-index: 1; 
-    background: rgba(255, 255, 255, 0.8); /* Halvtransparent sirkel bak knappene */
+    background: rgba(255, 255, 255, 0.9); /* Halvtransparent sirkel bak knappene */
     border-radius: 50%;
     width: 28px;
     height: 28px;
