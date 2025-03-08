@@ -35,8 +35,6 @@ header {
     margin-top: 20px;
 }
 
-
-
 main {
     width: 90%;
     max-width: 400px;
@@ -50,10 +48,11 @@ main {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     max-height: none; /* Fjern begrensning */
     height: auto; /* Tillat naturlig vekst */
     overflow: visible; /* Sørger for at nye elementer ikke skjules */
+    margin-bottom: 100px;
 }
 
 .wish-item {
@@ -80,6 +79,7 @@ main {
     max-height: 120px;
     border-radius: 5px;
     margin-bottom: 10px;
+    
 }
 
 .wish-item:hover {

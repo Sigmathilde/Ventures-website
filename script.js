@@ -31,6 +31,29 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "none";
     });
 
+    // Funksjon for å legge til eventlisteners til både eksisterende og nye elementer
+    function addEventListenersToWishItem(wishItem) {
+        const deleteBtn = wishItem.querySelector(".delete-btn");
+        const editBtn = wishItem.querySelector(".edit-btn");
+
+        // Rediger-knapp åpner modalen
+        editBtn.addEventListener("click", function (event) {
+            event.stopPropagation();
+            openModal(wishItem);
+        });
+
+        // Slette-funksjonalitet
+        deleteBtn.addEventListener("click", function (event) {
+            event.stopPropagation();
+            if (confirm("Er du sikker på at du vil slette dette ønsket?")) {
+                wishItem.remove();
+            }
+        });
+    }
+
+    // Legg til eventlisteners for eksisterende rektangel ved oppstart
+    document.querySelectorAll(".wish-item").forEach(addEventListenersToWishItem);
+
     addWishBtn.addEventListener("click", function () {
         const newWish = document.createElement("div");
         newWish.classList.add("wish-item");
@@ -40,28 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="wish-content">Ønske uten beskrivelse</div> 
         `;
 
-        // Rediger-knapp åpner modalen
-        newWish.querySelector(".edit-btn").addEventListener("click", function (event) {
-            event.stopPropagation();
-            openModal(newWish);
-        });
-
-        // Slette-funksjonalitet
-        newWish.querySelector(".delete-btn").addEventListener("click", function (event) {
-            event.stopPropagation();
-            if (confirm("Er du sikker på at du vil slette dette ønsket?")) {
-                newWish.remove();
-            }
-        });
+        addEventListenersToWishItem(newWish); // Sørger for at nye elementer får eventlisteners
 
         wishList.appendChild(newWish);
-    });
-
-    // Legg til eventlistener for eksisterende ønsker
-    document.querySelectorAll(".wish-item").forEach(function (item) {
-        item.querySelector(".edit-btn").addEventListener("click", function (event) {
-            event.stopPropagation();
-            openModal(item);
-        });
     });
 });
