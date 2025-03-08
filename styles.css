@@ -8,6 +8,9 @@ html, body {
     padding: 0;
     overflow-y: auto; /* Tillater vertikal scrolling */
     overflow-x: hidden; /* Hindrer horisontal scrolling */
+    overscroll-behavior: none; /* Hindrer overscroll */
+    touch-action: manipulation;
+
 }
 
 body {
