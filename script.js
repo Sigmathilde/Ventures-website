@@ -5,16 +5,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeModal = document.querySelector(".close-btn");
     const saveBtn = document.getElementById("save-btn");
 
+    const imageUrlInput = document.getElementById("image-url");
+    const imageUploadInput = document.getElementById("image-upload");
+
     let selectedWish = null;
 
     modal.style.display = "none";
 
-    // Åpne modalen kun når man trykker på blyantikonet
     function openModal(wishElement) {
         selectedWish = wishElement;
-        const content = selectedWish.querySelector(".wish-content");
+        const image = selectedWish.querySelector(".wish-image");
 
-        document.getElementById("description").value = content.innerText;
+        imageUrlInput.value = image.src || "";
         modal.style.display = "flex";
     }
 
@@ -25,24 +27,44 @@ document.addEventListener("DOMContentLoaded", function () {
     saveBtn.addEventListener("click", function () {
         if (!selectedWish) return;
 
-        const description = document.getElementById("description").value || "Ønske uten beskrivelse";
-        selectedWish.querySelector(".wish-content").innerText = description;
+        const imageUrl = imageUrlInput.value;
+        const uploadedImage = imageUploadInput.files[0];
+
+        const imageElement = selectedWish.querySelector(".wish-image");
+
+        if (uploadedImage) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imageElement.src = e.target.result;
+                imageElement.style.display = "block";
+            };
+            reader.readAsDataURL(uploadedImage);
+        } else if (imageUrl) {
+            imageElement.src = imageUrl;
+            imageElement.style.display = "block";
+        }
 
         modal.style.display = "none";
     });
 
-    // Funksjon for å legge til eventlisteners til både eksisterende og nye elementer
+    function toggleFlip(event) {
+        if (event.target.classList.contains("delete-btn") || event.target.classList.contains("edit-btn")) {
+            return; 
+        }
+        event.currentTarget.querySelector(".wish-card").classList.toggle("flipped");
+    }
+
     function addEventListenersToWishItem(wishItem) {
         const deleteBtn = wishItem.querySelector(".delete-btn");
         const editBtn = wishItem.querySelector(".edit-btn");
 
-        // Rediger-knapp åpner modalen
+        wishItem.addEventListener("click", toggleFlip);
+
         editBtn.addEventListener("click", function (event) {
             event.stopPropagation();
             openModal(wishItem);
         });
 
-        // Slette-funksjonalitet
         deleteBtn.addEventListener("click", function (event) {
             event.stopPropagation();
             if (confirm("Er du sikker på at du vil slette dette ønsket?")) {
@@ -51,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Legg til eventlisteners for eksisterende rektangel ved oppstart
     document.querySelectorAll(".wish-item").forEach(addEventListenersToWishItem);
 
     addWishBtn.addEventListener("click", function () {
@@ -60,11 +81,15 @@ document.addEventListener("DOMContentLoaded", function () {
         newWish.innerHTML = `
             <span class="delete-btn">×</span>
             <span class="edit-btn">✏️</span>
-            <div class="wish-content">Ønske uten beskrivelse</div> 
+            <div class="wish-card">
+                <div class="wish-front">
+                    <img class="wish-image" style="display: none;" />
+                </div>
+                <div class="wish-back"></div>
+            </div>
         `;
 
-        addEventListenersToWishItem(newWish); // Sørger for at nye elementer får eventlisteners
-
+        addEventListenersToWishItem(newWish);
         wishList.appendChild(newWish);
     });
 });

@@ -75,17 +75,18 @@ main {
 }
 
 .wish-image {
-    max-width: 80%;
-    max-height: 120px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Sørger for at bildet dekker hele kortet uten å strekkes */
+    border-radius: 10px;
+    display: none; /* Skjult til et bilde lastes opp */
 }
 
 .wish-item:hover {
-    background: #ccc;
+    background: #e5e4e4;
     transform: scale(1.02);
 }
+
 
 
 .wish-content {
@@ -94,13 +95,31 @@ main {
     text-align: center;
 }
 
-.delete-btn {
+/* Sørger for at X-knappen og blyanten alltid er synlige */
+.delete-btn, .edit-btn {
     position: absolute;
     top: 8px;
-    right: 10px;
-    font-size: 18px;
+    font-size: 14px;
     cursor: pointer;
+    z-index: 1; 
+    background: rgba(255, 255, 255, 0.8); /* Halvtransparent sirkel bak knappene */
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Plassering */
+.delete-btn {
+    right: 8px;
     color: red;
+}
+
+.edit-btn {
+    right: 40px;
+    color: blue;
 }
 
 #add-wish-btn {
@@ -134,7 +153,7 @@ main {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -266,11 +285,3 @@ input, textarea {
     transform: scale(1.1);
 }
 
-.edit-btn {
-    position: absolute;
-    top: 8px;
-    right: 30px; /* Plasseres ved siden av X-ikonet */
-    font-size: 12px;
-    cursor: pointer;
-    color: blue;
-}
