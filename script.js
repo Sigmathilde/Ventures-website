@@ -29,10 +29,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedWish = null;
     modal.style.display = "none";
 
-    function openModal(wishElement) {
+    function openModal(wishElement, isNew = false) {
         selectedWish = wishElement;
+        const modalTitle = document.querySelector("#edit-modal h2");
+    
+        if (isNew) {
+            modalTitle.textContent = "Lag et ønske";
+        } else {
+            modalTitle.textContent = "Endre ønske";
+        }
+    
         const image = selectedWish.querySelector(".wish-image");
-
+    
         if (image.src && image.style.display !== "none") {
             previewImage.src = image.src;
             previewImage.style.display = "block";
@@ -40,10 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
             previewImage.src = "";
             previewImage.style.display = "none";
         }
-
+    
         modal.style.display = "flex";
     }
-
+    
     closeModal.addEventListener("click", function () {
         modal.style.display = "none";
     });
@@ -75,8 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         editBtn.addEventListener("click", function (event) {
             event.stopPropagation();
-            openModal(wishItem);
+            openModal(wishItem, false);
         });
+        
 
         deleteBtn.addEventListener("click", function (event) {
             event.stopPropagation();
@@ -101,8 +110,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="wish-back"></div>
             </div>
         `;
-
+    
         addEventListenersToWishItem(newWish);
         wishList.appendChild(newWish);
+        
+        // Åpner edit-modalen automatisk med "Lag et ønske"
+        openModal(newWish, true);
     });
+    
 });
