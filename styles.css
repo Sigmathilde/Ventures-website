@@ -57,7 +57,7 @@ main {
     overflow: visible; /* Sørger for at nye elementer ikke skjules */
     margin-bottom: 100px;
     margin: 0 auto;
-    justify content: center;
+    justify-content: center;
 }
 
 .wish-item {
@@ -153,7 +153,6 @@ main {
 }
 
 .modal {
-    display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -337,7 +336,7 @@ input, textarea {
     cursor: pointer;
     display: flex;
     align-items: center;
-    z-index: 1100;;
+    z-index: 1100;
 }
 
 #profile-pic {
