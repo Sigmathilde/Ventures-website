@@ -119,3 +119,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const profilePic = document.getElementById("profile-pic");
+    const dropdownMenu = document.getElementById("profile-dropdown");
+
+    // Åpne/lukke dropdown-meny når man trykker på profilbildet
+    profilePic.addEventListener("click", function () {
+        dropdownMenu.classList.toggle("show");
+    });
+
+    // Lukk dropdown-menyen når man klikker utenfor
+    document.addEventListener("click", function (event) {
+        if (!profilePic.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove("show");
+        }
+    });
+
+    // Legg til event listeners for menyvalgene
+    document.getElementById("edit-profile").addEventListener("click", function () {
+        alert("Gå til 'Endre min profil'");
+    });
+
+    document.getElementById("active-wishes").addEventListener("click", function () {
+        alert("Gå til 'Aktive ønsker'");
+    });
+
+    document.getElementById("history").addEventListener("click", function () {
+        alert("Gå til 'Historikk'");
+    });
+});
