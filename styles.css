@@ -176,6 +176,7 @@ main {
     max-width: 350px;
     max-height: 80vh;
     overflow-y: auto;
+    overflow: hidden;
 }
 
 .modal-content h2 {
