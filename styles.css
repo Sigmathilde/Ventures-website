@@ -28,6 +28,11 @@ body {
 }
 
 header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
     font-family: 'Poppins', sans-serif;
     font-size: 1.5rem; /* Juster størrelsen basert på skjerm */
     color: white; /* Hvit fyll */
@@ -352,7 +357,7 @@ input, textarea {
 #profile-dropdown {
     color: #555;
     position: absolute;
-    top: 65px;
+    top: 70px;
     right: 0;
     background: white;
     border-radius: 12px;
@@ -386,3 +391,63 @@ input, textarea {
 #profile-dropdown.show {
     display: flex;
 }
+
+/* Container for hamburgermenyen */
+#menu-container {
+    position: absolute;
+    top: 50%;
+    left: 20px; /* Flyttet til venstre */
+    transform: translateY(-50%);
+    z-index: 1100;
+}
+
+/* Stil for hamburgermeny-knappen */
+#hamburger-menu {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+}
+
+/* Dropdown-menyen */
+#menu-dropdown {
+    color: black;
+    position: absolute;
+    top: 65%;
+    left: 5%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 180px;
+    display: none;
+    flex-direction: column;
+    z-index: 1200;
+}
+
+/* Stil for menyvalg */
+#menu-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-dropdown li {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#menu-dropdown li:hover {
+    background: #efefef;
+}
+
+/* Når dropdown-menyen er synlig */
+#menu-dropdown.show {
+    display: flex;
+}
+
