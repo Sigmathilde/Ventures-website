@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("edit-modal");
     const closeModal = document.querySelector(".close-btn");
     const saveBtn = document.getElementById("save-btn");
-    
-    const imageUrlInput = document.getElementById("image-url");
     const imageUploadInput = document.getElementById("image-upload"); // Hent riktig id
     const previewImage = document.getElementById("image-preview");
 
