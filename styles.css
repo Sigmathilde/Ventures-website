@@ -337,6 +337,7 @@ input, textarea {
     cursor: pointer;
     display: flex;
     align-items: center;
+    z-index: 1100;;
 }
 
 #profile-pic {
@@ -360,7 +361,7 @@ input, textarea {
     width: 180px;
     display: none;
     flex-direction: column;
-    z-index:1000;
+    z-index:1200;
 }
 
 #profile-dropdown ul {
