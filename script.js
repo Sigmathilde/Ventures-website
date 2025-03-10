@@ -145,6 +145,10 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Gå til 'Aktive ønsker'");
     });
 
+    document.getElementById("my-friends").addEventListener("click", function () {
+        alert("Gå til 'Mine venner'");
+    });
+
     document.getElementById("history").addEventListener("click", function () {
         alert("Gå til 'Historikk'");
     });

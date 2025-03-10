@@ -27,6 +27,17 @@ body {
     
 }
 
+#logo {
+    text-decoration: none;
+    color: white;
+    font-size: 2.6rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+
 header {
     display: flex;
     align-items: center;
