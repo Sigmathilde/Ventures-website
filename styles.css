@@ -355,7 +355,7 @@ input, textarea {
 
 /* Dropdown-meny */
 #profile-dropdown {
-    color: #555;
+    color: #7d7d7d;
     position: absolute;
     top: 70px;
     right: 0;
@@ -413,7 +413,7 @@ input, textarea {
 
 /* Dropdown-menyen */
 #menu-dropdown {
-    color: black;
+    color: rgb(79, 79, 79);
     position: absolute;
     top: 65%;
     left: 5%;
