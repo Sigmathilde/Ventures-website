@@ -395,9 +395,8 @@ input, textarea {
 /* Container for hamburgermenyen */
 #menu-container {
     position: absolute;
-    top: 50%;
-    left: 20px; /* Flyttet til venstre */
-    transform: translateY(-50%);
+    top: 10px;
+    left: 15px;  /* Ensures it's on the left */
     z-index: 1100;
 }
 
@@ -405,17 +404,28 @@ input, textarea {
 #hamburger-menu {
     background: none;
     border: none;
-    font-size: 32px;
+    font-size: 24px; /* Adjust size */
     cursor: pointer;
     color: white;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;  /* Adjust for better tap target */
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#hamburger-menu:hover {
+    background: rgba(255, 255, 255, 0.4);
 }
 
 /* Dropdown-menyen */
 #menu-dropdown {
     color: rgb(79, 79, 79);
     position: absolute;
-    top: 65%;
+    top: 42%;
     left: 5%;
     background: white;
     border-radius: 8px;
@@ -440,10 +450,39 @@ input, textarea {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.2s;
+    display: flex;
+    align-items: center;
 }
+
 
 #menu-dropdown li:hover {
     background: #efefef;
+}
+
+#menu-user-info {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    background: #f9f9f9;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* Profile picture inside the menu */
+#menu-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/* Username text */
+#menu-username {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
 }
 
 /* Når dropdown-menyen er synlig */
