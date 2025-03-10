@@ -71,7 +71,7 @@ main {
     max-height: none; /* Fjern begrensning */
     height: auto; /* Tillat naturlig vekst */
     overflow: visible; /* Sørger for at nye elementer ikke skjules */
-    margin-bottom: 100px;
+    margin-bottom: 100px; /* Plass til knapp */
     margin: 0 auto;
     justify-content: center;
 }
@@ -348,7 +348,7 @@ input, textarea {
 /* Profilknapp */
 #profile-container {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 15px;
     cursor: pointer;
     display: flex;
@@ -368,7 +368,7 @@ input, textarea {
 #profile-dropdown {
     color: #7d7d7d;
     position: absolute;
-    top: 70px;
+    top: 80px;
     right: 0;
     background: white;
     border-radius: 12px;
