@@ -436,15 +436,16 @@ input, textarea {
 #menu-dropdown {
     color: rgb(79, 79, 79);
     position: absolute;
-    top: 42%;
-    left: 5%;
+    top: 60px;
+    left: 15px;
     background: white;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    width: 180px;
+    width: 220px;
     display: none;
     flex-direction: column;
+    padding: 10px;
     z-index: 1200;
 }
 
