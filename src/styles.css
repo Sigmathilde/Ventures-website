@@ -1,0 +1,540 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+
+.App {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Tillater vertikal scrolling */
+  overflow-x: hidden; /* Hindrer horisontal scrolling */
+  overscroll-behavior: none; /* Hindrer overscroll */
+  touch-action: manipulation;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, #87ceeb, #b0e0e6);
+  height: 100vh;
+  position: relative;
+}
+
+#logo {
+  text-decoration: none;
+  color: white;
+  font-size: 2.6rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem; /* Juster størrelsen basert på skjerm */
+  color: white; /* Hvit fyll */
+  border-color: black;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+main {
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#wish-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: none; /* Fjern begrensning */
+  height: auto; /* Tillat naturlig vekst */
+  overflow: visible; /* Sørger for at nye elementer ikke skjules */
+  margin-bottom: 100px; /* Plass til knapp */
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.wish-item {
+  position: relative;
+  width: 90%; /* Mindre størrelse for bedre balanse */
+  max-width: 350px;
+  height: 200px; /* Justert høyde */
+  background: #f3f3f3;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.wish-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Sørger for at bildet dekker hele kortet uten å strekkes */
+  display: none; /* Skjult til et bilde lastes opp */
+}
+
+.wish-item:hover {
+  background: #e5e4e4;
+  transform: scale(1.02);
+}
+
+.wish-content {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Sørger for at X-knappen og blyanten alltid er synlige */
+.delete-btn,
+.edit-btn {
+  position: absolute;
+  top: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Halvtransparent sirkel bak knappene */
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Plassering */
+.delete-btn {
+  right: 8px;
+  color: red;
+}
+
+.edit-btn {
+  right: 40px;
+  color: blue;
+}
+
+#add-wish-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #ff6600;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s, transform 0.2s;
+  text-align: center;
+  line-height: 55px;
+  padding: 0;
+}
+
+#add-wish-btn:hover {
+  background-color: #e65c00;
+  transform: scale(1.1);
+}
+
+.modal {
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 900;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 350px;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow: hidden;
+}
+
+.modal-content h2 {
+  text-align: center;
+}
+
+.close-btn {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#save-btn {
+  width: 100%;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Plasser skyene bak innholdet */
+.sky {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Sørger for at skyene er bak alt annet */
+}
+
+/* Skyene har nå en realistisk form */
+.cloud {
+  position: absolute;
+  bottom: -100px;
+  background: white;
+  border-radius: 50px;
+  opacity: 0.8;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+  animation: float-up 15s linear infinite;
+}
+
+/* Skyform med flere overlappende sirkler */
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 50px;
+  height: 50px;
+  top: -30px;
+  left: 10px;
+}
+
+.cloud::after {
+  width: 70px;
+  height: 70px;
+  top: -40px;
+  right: 10px;
+}
+
+/* Plasserer skyene på tilfeldige steder */
+.cloud:nth-child(1) {
+  left: 5%;
+  width: 120px;
+  height: 70px;
+  animation-duration: 20s;
+}
+.cloud:nth-child(2) {
+  left: 25%;
+  width: 150px;
+  height: 80px;
+  animation-duration: 25s;
+}
+.cloud:nth-child(3) {
+  left: 50%;
+  width: 130px;
+  height: 75px;
+  animation-duration: 18s;
+}
+.cloud:nth-child(4) {
+  left: 75%;
+  width: 170px;
+  height: 90px;
+  animation-duration: 22s;
+}
+.cloud:nth-child(5) {
+  left: 90%;
+  width: 110px;
+  height: 65px;
+  animation-duration: 19s;
+}
+
+/* Skyene flyter sakte oppover */
+@keyframes float-up {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-110vh);
+    opacity: 0;
+  } /* Forsvinner i toppen */
+}
+
+#scroll-to-top-btn {
+  position: fixed;
+  bottom: 90px; /* Rett over + knappen */
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #ff6600;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s, transform 0.2s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#scroll-to-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+#scroll-to-top-btn:hover {
+  background-color: #e65c00;
+  transform: scale(1.1);
+}
+
+.buddy-image {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 40px; /* Størrelse på profilbildet */
+  height: 40px;
+  border-radius: 50%; /* Gjør det rundt */
+  object-fit: cover; /* Sørger for at bildet ikke strekkes */
+  border: 2px solid white; /* Gir en fin kant */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  display: none; /* Skjules til vi har et bilde */
+}
+
+#image-preview-container {
+  border-radius: 10px;
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+#image-preview {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+/* Profilknapp */
+#profile-container {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: 1100;
+}
+
+#profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown-meny */
+#profile-dropdown {
+  color: #7d7d7d;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 180px;
+  display: none;
+  flex-direction: column;
+  z-index: 1200;
+}
+
+#profile-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#profile-dropdown li {
+  padding: 12px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#profile-dropdown li:hover {
+  background: #efefef;
+}
+
+/* Når dropdown-menyen er synlig */
+#profile-dropdown.show {
+  display: flex;
+}
+
+/* Container for hamburgermenyen */
+#menu-container {
+  position: absolute;
+  top: 10px;
+  left: 15px; /* Ensures it's on the left */
+  z-index: 1100;
+}
+
+/* Stil for hamburgermeny-knappen */
+#hamburger-menu {
+  background: none;
+  border: none;
+  font-size: 24px; /* Adjust size */
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust for better tap target */
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#hamburger-menu:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Dropdown-menyen */
+#menu-dropdown {
+  color: rgb(79, 79, 79);
+  position: absolute;
+  top: 60px;
+  left: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 220px;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1200;
+}
+
+/* Stil for menyvalg */
+#menu-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#menu-dropdown li {
+  padding: 12px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+#menu-dropdown li:hover {
+  background: #efefef;
+}
+
+#menu-user-info {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  background: #f9f9f9;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Profile picture inside the menu */
+#menu-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+/* Username text */
+#menu-username {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Når dropdown-menyen er synlig */
+#menu-dropdown.show {
+  display: flex;
+}

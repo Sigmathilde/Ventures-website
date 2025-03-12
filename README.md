@@ -43,3 +43,6 @@ Whether you're trying to **read more books, exercise regularly, or learn a new s
 ```sh
 git clone https://github.com/your-username/venture-website.git
 cd venture-website
+deno install
+deno task build
+deno task start
