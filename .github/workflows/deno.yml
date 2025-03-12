@@ -24,3 +24,12 @@ jobs:
 
       - name: Run linter
         run: deno lint
+
+      - name: Install dependencies
+        run: deno install
+
+      - name: Run build task
+        run: deno task build
+
+      - name: Start server
+        run: deno task start
