@@ -32,4 +32,4 @@ jobs:
         run: deno task build
 
       - name: Run Deno
-        run: deno run --allow-net --allow-read main.ts
+        run: deno run --allow-net --allow-read --allow-env main.ts
