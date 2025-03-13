@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import "./styles.css";
 import defaultProfile from "../assets/default-profile.png";
+import { useQuery } from "@tanstack/react-query";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+
+  const { data: friends } = useQuery({
+    queryKey: ["friends"],
+    queryFn: async () => {
+      const response = await fetch("/api/friends");
+      return response.json();
+    },
+  });
+
   return (
     <div className="App">
       <header>
@@ -29,7 +39,14 @@ function App() {
             <ul>
               <li id="edit-profile">Endre min profil</li>
               <li id="active-wishes">Aktive ønsker</li>
-              <li id="my-friends">Mine venner</li>
+              <li
+                onClick={() =>
+                  alert("Mine venner " + JSON.stringify(friends || []))
+                }
+                id="my-friends"
+              >
+                Mine venner
+              </li>
               <li id="history">Historikk</li>
             </ul>
           </div>
