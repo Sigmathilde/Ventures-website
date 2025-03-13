@@ -101,8 +101,6 @@ function App() {
         <div className="cloud"></div>
         <div className="cloud"></div>
       </div>
-
-      <script src="script.js" defer></script>
     </div>
   );
 }
