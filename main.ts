@@ -31,9 +31,12 @@ app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 
   // Inform Deno Deploy that the server has started
-  fetch(`http://localhost:${port}`).then(() => {
-    console.log("Deno Deploy informed that the server has started");
-  }).catch((err) => {
-    console.error("Failed to inform Deno Deploy:", err);
-  });
+  fetch(`http://localhost:${port}`)
+    .then(() => {
+      console.log("Deno Deploy informed that the server has started");
+    })
+    .catch((err) => {
+      console.error("Failed to inform Deno Deploy:", err);
+    });
+  return 0;
 });
