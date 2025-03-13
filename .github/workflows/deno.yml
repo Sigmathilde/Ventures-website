@@ -32,4 +32,4 @@ jobs:
         run: deno task build
 
       - name: Start server
-        run: deno task start
+        run: deno run main.ts
