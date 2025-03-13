@@ -9,7 +9,9 @@ function App() {
     <div className="App">
       <header>
         <div onClick={() => setShowMenu(!showMenu)} id="menu-container">
-          <button id="hamburger-menu">{!showMenu ? "☰" : "×"}</button>
+          <button type="button" id="hamburger-menu">
+            {!showMenu ? "☰" : "×"}
+          </button>
         </div>
         <a href="#" id="logo">
           Venture
@@ -52,6 +54,7 @@ function App() {
         </div>
 
         <button
+          type="button"
           id="add-wish-btn"
           onClick={() => {
             setShowModal(!showModal);
@@ -61,7 +64,9 @@ function App() {
         </button>
       </main>
 
-      <button id="scroll-to-top-btn">↑</button>
+      <button type="button" id="scroll-to-top-btn">
+        ↑
+      </button>
 
       {showModal && (
         <div id="edit-modal" className="modal">
@@ -82,6 +87,7 @@ function App() {
               placeholder="Navn på ansvarspartner"
             />
             <button
+              type="button"
               id="save-btn"
               onClick={() => {
                 alert("håndter lagring i api-et");
