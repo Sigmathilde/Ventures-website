@@ -32,4 +32,4 @@ jobs:
         run: deno task build
 
       - name: Start server
-        run: deno run main.ts
+        run: deno run --allow-read --allow-env --allow-net main.ts
