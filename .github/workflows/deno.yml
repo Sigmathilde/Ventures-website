@@ -30,9 +30,6 @@ jobs:
 
       - name: Run build task
         run: deno task build
-      - name: Upload to Deno Deploy
-        uses: denoland/deployctl@v1
-        with:
-          project: "Ventures-website"
-          entrypoint: "main.ts"
-          root: ""
+
+      - name: Run Deno
+        run: deno run --allow-net --allow-read main.ts
